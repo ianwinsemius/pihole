@@ -10,7 +10,11 @@ cp .env.example .env
 docker compose up -d
 ```
 
-The admin dashboard will be available at `http://<your-server-ip>/admin`.
+The admin dashboard will be available at `http://<your-server-ip>:8089/admin`.
+
+> **Note:** This uses `network_mode: host` so Pi-hole binds directly to the host network,
+> avoiding port conflicts with existing DNS services. The web UI defaults to port 8089
+> to avoid conflicts with port 80. Change `WEB_PORT` in `.env` if needed.
 
 ## Configuration
 
