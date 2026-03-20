@@ -1,0 +1,4 @@
+# Blocklists — these are loaded by Pi-hole's gravity
+# Default list is included automatically; add extras below
+https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt
