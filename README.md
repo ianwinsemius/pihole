@@ -5,16 +5,18 @@ Docker Compose setup for running [Pi-hole](https://pi-hole.net/) as a network-wi
 ## Quick Start
 
 ```bash
+# Free port 53 (disables systemd-resolved stub listener)
+./setup.sh
+
 cp .env.example .env
 # Edit .env — set WEBPASSWORD and FTLCONF_LOCAL_IPV4 to your server's IP
 docker compose up -d
 ```
 
-The admin dashboard will be available at `http://<your-server-ip>:8089/admin`.
+The admin dashboard will be available at `http://<your-server-ip>/admin`.
 
-> **Note:** This uses `network_mode: host` so Pi-hole binds directly to the host network,
-> avoiding port conflicts with existing DNS services. The web UI defaults to port 8089
-> to avoid conflicts with port 80. Change `WEB_PORT` in `.env` if needed.
+> **Note:** Port 53 is often held by `systemd-resolved`. Run `./setup.sh` first
+> to disable its stub listener and free the port for Pi-hole.
 
 ## Configuration
 

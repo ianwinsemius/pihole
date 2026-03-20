@@ -2,13 +2,14 @@ services:
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
-    network_mode: host
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "${WEB_PORT:-80}:80/tcp"
     environment:
       TZ: ${TZ:-America/Chicago}
       WEBPASSWORD: ${WEBPASSWORD:-changeme}
       FTLCONF_LOCAL_IPV4: ${FTLCONF_LOCAL_IPV4:-}
-      WEB_PORT: ${WEB_PORT:-8089}
-      DNSMASQ_LISTENING: all
     volumes:
       - pihole-data:/etc/pihole
       - dnsmasq-data:/etc/dnsmasq.d
@@ -17,6 +18,9 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
 
 volumes:
   pihole-data:
